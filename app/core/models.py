@@ -21,7 +21,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
-    
+
     def create_superuser(self, email, password):
         """Create and return a new superuser."""
         user = self.create_user(email, password)
@@ -31,6 +31,7 @@ class UserManager(BaseUserManager):
 
         return user
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     """User in the system."""
     email = models.EmailField(max_length=255, unique=True)
@@ -38,6 +39,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    objects = UserManager() # assign a user manager
+    objects = UserManager()  # assign a user manager
 
-    USERNAME_FIELD = 'email' # replace the 'username' default fields in Django
+    USERNAME_FIELD = 'email'  # replace the 'username' default fields in Django
