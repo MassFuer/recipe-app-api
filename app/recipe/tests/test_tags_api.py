@@ -13,7 +13,7 @@ from core.models import Tag
 from recipe.serializers import TagSerializer
 
 
-TAG_URL = reverse('recipe:tag-list')
+TAGS_URL = reverse('recipe:tag-list')
 
 
 def detail_url(tag_id):
@@ -34,7 +34,7 @@ class PublicTagsApiTests(TestCase):
 
     def test_login_required(self):
         """Test that login is required to access the tags endpoint."""
-        res = self.client.get(TAG_URL)
+        res = self.client.get(TAGS_URL)
 
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -52,7 +52,7 @@ class PrivateTagsApiTests(TestCase):
         Tag.objects.create(user=self.user, name='Vegan')
         Tag.objects.create(user=self.user, name='Dessert')
 
-        res = self.client.get(TAG_URL)
+        res = self.client.get(TAGS_URL)
 
         tags = Tag.objects.all().order_by('-name')
         serializer = TagSerializer(tags, many=True)
@@ -68,7 +68,7 @@ class PrivateTagsApiTests(TestCase):
         Tag.objects.create(user=other_user, name='Fruity')
         tag = Tag.objects.create(user=self.user, name='Comfort Food')
 
-        res = self.client.get(TAG_URL)
+        res = self.client.get(TAGS_URL)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(len(res.data), 1)
