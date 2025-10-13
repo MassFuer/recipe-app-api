@@ -19,6 +19,7 @@ services:
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=changeme
+      - DEBUG=1 # Enable debug mode in the local machine
     depends_on:
       - db
   
