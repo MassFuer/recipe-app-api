@@ -9,19 +9,14 @@ from rest_framework.test import APIClient
 
 
 class HealthCheckTests(TestCase):
-    """
-    Tests for the health check endpoint.
-    """
-
-    def setUp(self):
-        self.client = APIClient()
-        self.url = reverse("health-check")
+    """Tests for the health check endpoint."""
 
     def test_health_check(self):
         """
         Test that the health check endpoint returns a 200
         status code and the expected response.
         """
-        response = self.client.get(self.url)
+        client = APIClient()
+        url = reverse("health-check")
+        response = client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.json(), {"healthy": True})

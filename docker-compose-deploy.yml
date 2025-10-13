@@ -34,9 +34,9 @@ services:
     depends_on:
       - app
     ports:
-      - 80:80  # mapping host port 80 to container port 8000
+      - 80:8000  # mapping host port 80 to container port 8000
     volumes:
-      - static-data:/vol/web
+      - static-data:/vol/static
   
 volumes:
   postgres-data:
